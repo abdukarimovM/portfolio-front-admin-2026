@@ -4,6 +4,7 @@
 
     <div class="bg-white p-5 rounded shadow mb-5">
       <div class="grid grid-cols-2 gap-3">
+
         <input
           v-model="name"
           placeholder="Social Name"
@@ -19,15 +20,24 @@
         <input
           v-model="icon"
           placeholder="Icon Class"
-          class="border p-2"
+          class="border p-2 col-span-2"
         />
+
       </div>
 
       <button
-        @click="addSocial"
+        @click="saveSocial"
         class="mt-4 bg-indigo-700 text-white px-4 py-2 rounded"
       >
-        Add Social
+        {{ editId ? 'Update Social' : 'Add Social' }}
+      </button>
+
+      <button
+        v-if="editId"
+        @click="cancelEdit"
+        class="mt-4 ml-3 bg-gray-500 text-white px-4 py-2 rounded"
+      >
+        Cancel
       </button>
     </div>
 
@@ -42,8 +52,13 @@
       </thead>
 
       <tbody>
-        <tr v-for="item in socials" :key="item.id">
-          <td class="border p-2">{{ item.name }}</td>
+        <tr
+          v-for="item in socials"
+          :key="item.id"
+        >
+          <td class="border p-2">
+            {{ item.name }}
+          </td>
 
           <td class="border p-2">
             <a
@@ -60,12 +75,21 @@
           </td>
 
           <td class="border p-2">
+
+            <button
+              @click="editSocial(item)"
+              class="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
+            >
+              Edit
+            </button>
+
             <button
               @click="deleteSocial(item.id)"
               class="bg-red-600 text-white px-3 py-1 rounded"
             >
               Delete
             </button>
+
           </td>
         </tr>
       </tbody>
@@ -74,12 +98,13 @@
 </template>
 
 <script setup>
-
 definePageMeta({
   middleware: 'auth'
 })
 
 const socials = ref([])
+
+const editId = ref(null)
 
 const name = ref('')
 const link = ref('')
@@ -91,24 +116,61 @@ const getSocials = async () => {
   )
 }
 
-const addSocial = async () => {
-  await $fetch(
-    'http://localhost:3001/api/socials',
-    {
-      method: 'POST',
-      body: {
-        name: name.value,
-        link: link.value,
-        icon: icon.value,
-      },
-    }
-  )
+const clearForm = () => {
+  editId.value = null
 
   name.value = ''
   link.value = ''
   icon.value = ''
+}
 
-  await getSocials()
+const editSocial = (item) => {
+  editId.value = item.id
+
+  name.value = item.name
+  link.value = item.link
+  icon.value = item.icon
+}
+
+const cancelEdit = () => {
+  clearForm()
+}
+
+const saveSocial = async () => {
+
+  if (editId.value) {
+
+    await $fetch(
+      `http://localhost:3001/api/socials/${editId.value}`,
+      {
+        method: 'PUT', // Agar controller PATCH bo'lsa PATCH qilib o'zgartiring
+        body: {
+          name: name.value,
+          link: link.value,
+          icon: icon.value,
+        },
+      }
+    )
+
+  } else {
+
+    await $fetch(
+      'http://localhost:3001/api/socials',
+      {
+        method: 'POST',
+        body: {
+          name: name.value,
+          link: link.value,
+          icon: icon.value,
+        },
+      }
+    )
+
+  }
+
+  clearForm()
+
+  getSocials()
 }
 
 const deleteSocial = async (id) => {
@@ -119,7 +181,7 @@ const deleteSocial = async (id) => {
     }
   )
 
-  await getSocials()
+  getSocials()
 }
 
 onMounted(() => {

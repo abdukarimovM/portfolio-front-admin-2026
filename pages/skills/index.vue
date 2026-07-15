@@ -5,7 +5,7 @@
     <div class="bg-white p-5 rounded shadow mb-5">
       <div class="grid grid-cols-2 gap-3">
         <input
-          v-model="title"
+          v-model="name"
           placeholder="Skill Name"
           class="border p-2"
         />
@@ -18,10 +18,18 @@
       </div>
 
       <button
-        @click="addSkill"
+        @click="saveSkill"
         class="mt-4 bg-indigo-700 text-white px-4 py-2 rounded"
       >
-        Add Skill
+        {{ editId ? 'Update Skill' : 'Add Skill' }}
+      </button>
+
+      <button
+        v-if="editId"
+        @click="cancelEdit"
+        class="mt-4 ml-3 bg-gray-500 text-white px-4 py-2 rounded"
+      >
+        Cancel
       </button>
     </div>
 
@@ -35,20 +43,34 @@
       </thead>
 
       <tbody>
-        <tr v-for="item in skills" :key="item.id">
-          <td class="border p-2">{{ item.title }}</td>
+        <tr
+          v-for="item in skills"
+          :key="item.id"
+        >
+          <td class="border p-2">
+            {{ item.name }}
+          </td>
 
           <td class="border p-2">
             {{ item.icon }}
           </td>
 
           <td class="border p-2">
+
+            <button
+              @click="editSkill(item)"
+              class="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
+            >
+              Edit
+            </button>
+
             <button
               @click="deleteSkill(item.id)"
               class="bg-red-600 text-white px-3 py-1 rounded"
             >
               Delete
             </button>
+
           </td>
         </tr>
       </tbody>
@@ -60,36 +82,82 @@
 definePageMeta({
   middleware: 'auth'
 })
+
 const skills = ref([])
 
-const title = ref('')
+const editId = ref(null)
+
+const name = ref('')
 const icon = ref('')
 
 const getSkills = async () => {
-  skills.value = await $fetch('http://localhost:3001/api/skills')
+  skills.value = await $fetch(
+    'http://localhost:3001/api/skills'
+  )
 }
 
-const addSkill = async () => {
-  await $fetch('http://localhost:3001/api/skills', {
-    method: 'POST',
-    body: {
-      title: title.value,
-      icon: icon.value,
-    },
-  })
+const clearForm = () => {
+  editId.value = null
 
-  title.value = ''
+  name.value = ''
   icon.value = ''
+}
 
-  await getSkills()
+const editSkill = (item) => {
+  editId.value = item.id
+
+  name.value = item.name
+  icon.value = item.icon
+}
+
+const cancelEdit = () => {
+  clearForm()
+}
+
+const saveSkill = async () => {
+
+  if (editId.value) {
+
+    await $fetch(
+      `http://localhost:3001/api/skills/${editId.value}`,
+      {
+        method: 'PUT',
+        body: {
+           name: name.value,
+  icon: icon.value,
+        },
+      }
+    )
+
+  } else {
+
+    await $fetch(
+      'http://localhost:3001/api/skills',
+      {
+        method: 'POST',
+        body: {
+           name: name.value,
+  icon: icon.value,
+        },
+      }
+    )
+
+  }
+
+  clearForm()
+
+  getSkills()
 }
 
 const deleteSkill = async (id) => {
-  await $fetch(`http://localhost:3001/api/skills/${id}`, {
-    method: 'DELETE',
-  })
+  await $fetch(
+    `http://localhost:3001/api/skills/${id}`,
+    {
+      method: 'DELETE',
+    }
+  )
 
-  await getSkills()
+  getSkills()
 }
 
 onMounted(() => {
