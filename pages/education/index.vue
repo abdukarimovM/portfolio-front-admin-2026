@@ -21,7 +21,7 @@
 
           <img
             v-if="icon"
-            :src="`http://localhost:3001${icon}`"
+            :src="`https://portfolio-backend-vn5k.onrender.com${icon}`"
             class="w-32 h-32 object-contain mt-4 border rounded"
           />
 
@@ -116,7 +116,7 @@ const endYear = ref('')
 const direction = ref('')
 
 const getEducations = async () => {
-  educations.value = await $fetch('http://localhost:3001/api/education')
+  educations.value = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/education')
 }
 
 const clearForm = () => {
@@ -153,12 +153,12 @@ const saveEducation = async () => {
   }
 
   if (editId.value) {
-    await $fetch(`http://localhost:3001/api/education/${editId.value}`, {
+    await $fetch(`https://portfolio-backend-vn5k.onrender.com/api/education/${editId.value}`, {
       method: 'PATCH',
       body: payload,
     })
   } else {
-    await $fetch('http://localhost:3001/api/education', {
+    await $fetch('https://portfolio-backend-vn5k.onrender.com/api/education', {
       method: 'POST',
       body: payload,
     })
@@ -175,7 +175,7 @@ const uploadImage = async (event) => {
   const formData = new FormData()
   formData.append('file', file)
 
-  const res = await $fetch('http://localhost:3001/api/upload', {
+  const res = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/upload', {
     method: 'POST',
     body: formData,
   })

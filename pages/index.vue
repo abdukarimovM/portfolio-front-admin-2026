@@ -50,12 +50,12 @@ const socials = ref(0)
 const contacts = ref(0)
 
 const getStatistics = async () => {
-  const aboutsData = await $fetch('http://localhost:3001/api/abouts')
-  const educationData = await $fetch('http://localhost:3001/api/education')
-  const projectsData = await $fetch('http://localhost:3001/api/projects')
-  const skillsData = await $fetch('http://localhost:3001/api/skills')
-  const socialsData = await $fetch('http://localhost:3001/api/socials')
-  const contactsData = await $fetch('http://localhost:3001/api/contact')
+  const aboutsData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/abouts')
+  const educationData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/education')
+  const projectsData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/projects')
+  const skillsData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/skills')
+  const socialsData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/socials')
+  const contactsData = await $fetch('https://portfolio-backend-vn5k.onrender.com/api/contact')
 
   abouts.value = aboutsData.length
   education.value = educationData.length

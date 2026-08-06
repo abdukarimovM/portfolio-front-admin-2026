@@ -68,7 +68,7 @@
   const login = async () => {
   try {
     const res = await $fetch(
-      'http://localhost:3001/api/admin/auth/login',
+      'https://portfolio-backend-vn5k.onrender.com/api/admin/auth/login',
       {
         method: 'POST',
         body: {
