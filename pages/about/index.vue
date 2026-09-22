@@ -36,7 +36,7 @@
 
   <img
     v-if="image"
-    :src="`https://portfolio-backend-vn5k.onrender.com${image}`"
+    :src="`https://portfolio-backend-vk4j.onrender.com${image}`"
     class="w-32 h-32 object-cover rounded mt-4 border"
   />
 </div>
@@ -93,7 +93,7 @@
 
           <td class="border p-2">
   <img
-    :src="`https://portfolio-backend-vn5k.onrender.com${item.image}`"
+    :src="`https://portfolio-backend-vk4j.onrender.com${item.image}`"
     class="w-20 h-20 object-cover rounded"
   />
 </td>
@@ -141,7 +141,7 @@ const uploading = ref(false)
 
 const getAbouts = async () => {
   abouts.value = await $fetch(
-    'https://portfolio-backend-vn5k.onrender.com/api/abouts'
+    'https://portfolio-backend-vk4j.onrender.com/api/abouts'
   )
 }
 
@@ -178,7 +178,7 @@ const uploadImage = async (event) => {
   formData.append('file', file)
 
   const res = await $fetch(
-    'https://portfolio-backend-vn5k.onrender.com/api/upload',
+    'https://portfolio-backend-vk4j.onrender.com/api/upload',
     {
       method: 'POST',
       body: formData,
@@ -195,7 +195,7 @@ const saveAbout = async () => {
   if (editId.value) {
 
     await $fetch(
-      `https://portfolio-backend-vn5k.onrender.com/api/abouts/${editId.value}`,
+      `https://portfolio-backend-vk4j.onrender.com/api/abouts/${editId.value}`,
       {
         method: 'PATCH',
         body: {
@@ -210,7 +210,7 @@ const saveAbout = async () => {
   } else {
 
     await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/abouts',
+      'https://portfolio-backend-vk4j.onrender.com/api/abouts',
       {
         method: 'POST',
         body: {
@@ -231,7 +231,7 @@ const saveAbout = async () => {
 
 const deleteAbout = async (id) => {
   await $fetch(
-    `https://portfolio-backend-vn5k.onrender.com/api/abouts/${id}`,
+    `https://portfolio-backend-vk4j.onrender.com/api/abouts/${id}`,
     {
       method: 'DELETE',
     }

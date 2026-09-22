@@ -112,7 +112,7 @@ const icon = ref('')
 
 const getSocials = async () => {
   socials.value = await $fetch(
-    'https://portfolio-backend-vn5k.onrender.com/api/socials'
+    'https://portfolio-backend-vk4j.onrender.com/api/socials'
   )
 }
 
@@ -141,7 +141,7 @@ const saveSocial = async () => {
   if (editId.value) {
 
     await $fetch(
-      `https://portfolio-backend-vn5k.onrender.com/api/socials/${editId.value}`,
+      `https://portfolio-backend-vk4j.onrender.com/api/socials/${editId.value}`,
       {
         method: 'PUT', // Agar controller PATCH bo'lsa PATCH qilib o'zgartiring
         body: {
@@ -155,7 +155,7 @@ const saveSocial = async () => {
   } else {
 
     await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/socials',
+      'https://portfolio-backend-vk4j.onrender.com/api/socials',
       {
         method: 'POST',
         body: {
@@ -175,7 +175,7 @@ const saveSocial = async () => {
 
 const deleteSocial = async (id) => {
   await $fetch(
-    `https://portfolio-backend-vn5k.onrender.com/api/socials/${id}`,
+    `https://portfolio-backend-vk4j.onrender.com/api/socials/${id}`,
     {
       method: 'DELETE',
     }

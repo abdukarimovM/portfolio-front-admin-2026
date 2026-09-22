@@ -92,7 +92,7 @@ const icon = ref('')
 
 const getSkills = async () => {
   skills.value = await $fetch(
-    'https://portfolio-backend-vn5k.onrender.com/api/skills'
+    'https://portfolio-backend-vk4j.onrender.com/api/skills'
   )
 }
 
@@ -119,7 +119,7 @@ const saveSkill = async () => {
   if (editId.value) {
 
     await $fetch(
-      `https://portfolio-backend-vn5k.onrender.com/api/skills/${editId.value}`,
+      `https://portfolio-backend-vk4j.onrender.com/api/skills/${editId.value}`,
       {
         method: 'PUT',
         body: {
@@ -132,7 +132,7 @@ const saveSkill = async () => {
   } else {
 
     await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/skills',
+      'https://portfolio-backend-vk4j.onrender.com/api/skills',
       {
         method: 'POST',
         body: {
@@ -151,7 +151,7 @@ const saveSkill = async () => {
 
 const deleteSkill = async (id) => {
   await $fetch(
-    `https://portfolio-backend-vn5k.onrender.com/api/skills/${id}`,
+    `https://portfolio-backend-vk4j.onrender.com/api/skills/${id}`,
     {
       method: 'DELETE',
     }

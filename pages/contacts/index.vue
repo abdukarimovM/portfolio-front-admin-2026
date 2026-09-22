@@ -44,13 +44,13 @@ const contacts = ref([])
 
 const getContacts = async () => {
   contacts.value = await $fetch(
-    'https://portfolio-backend-vn5k.onrender.com/api/contact'
+    'https://portfolio-backend-vk4j.onrender.com/api/contact'
   )
 }
 
 const deleteContact = async (id) => {
   await $fetch(
-    `https://portfolio-backend-vn5k.onrender.com/api/contact/${id}`,
+    `https://portfolio-backend-vk4j.onrender.com/api/contact/${id}`,
     {
       method: 'DELETE',
     }

@@ -21,7 +21,7 @@
 
   <img
   v-if="image"
-  :src="`https://portfolio-backend-vn5k.onrender.com${image}`"
+  :src="`https://portfolio-backend-vk4j.onrender.com${image}`"
   class="w-44 h-28 mt-4 object-cover rounded border"
 />
 
@@ -83,7 +83,7 @@
 
           <td class="border p-2">
   <img
-    :src="`https://portfolio-backend-vn5k.onrender.com${item.image}`"
+    :src="`https://portfolio-backend-vk4j.onrender.com${item.image}`"
     class="w-24 h-16 object-cover rounded"
   />
 </td>
@@ -150,7 +150,7 @@ const direction = ref('')
 const getProjects = async () => {
   try {
     projects.value = await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/projects'
+      'https://portfolio-backend-vk4j.onrender.com/api/projects'
     )
   } catch (error) {
     console.error(error)
@@ -196,7 +196,7 @@ const uploadImage = async (event) => {
   try {
 
     const res = await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/upload',
+      'https://portfolio-backend-vk4j.onrender.com/api/upload',
       {
         method: 'POST',
         body: formData,
@@ -221,7 +221,7 @@ const saveProject = async () => {
   if (editId.value) {
 
     await $fetch(
-      `https://portfolio-backend-vn5k.onrender.com/api/projects/${editId.value}`,
+      `https://portfolio-backend-vk4j.onrender.com/api/projects/${editId.value}`,
       {
         method: 'PUT',
         body: {
@@ -237,7 +237,7 @@ const saveProject = async () => {
   } else {
 
     await $fetch(
-      'https://portfolio-backend-vn5k.onrender.com/api/projects',
+      'https://portfolio-backend-vk4j.onrender.com/api/projects',
       {
         method: 'POST',
         body: {
@@ -259,7 +259,7 @@ const saveProject = async () => {
 
 const deleteProject = async (id) => {
   await $fetch(
-    `https://portfolio-backend-vn5k.onrender.com/api/projects/${id}`,
+    `https://portfolio-backend-vk4j.onrender.com/api/projects/${id}`,
     {
       method: 'DELETE',
     }
