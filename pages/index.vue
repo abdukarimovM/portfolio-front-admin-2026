@@ -50,22 +50,22 @@ const contacts = ref(0);
 
 const getStatistics = async () => {
   const aboutsData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/abouts"
+    "https://portfolio-backend-blond-xi.vercel.app/api/abouts"
   );
   const educationData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/education"
+    "https://portfolio-backend-blond-xi.vercel.app/api/education"
   );
   const projectsData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/projects"
+    "https://portfolio-backend-blond-xi.vercel.app/api/projects"
   );
   const skillsData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/skills"
+    "https://portfolio-backend-blond-xi.vercel.app/api/skills"
   );
   const socialsData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/socials"
+    "https://portfolio-backend-blond-xi.vercel.app/api/socials"
   );
   const contactsData = await $fetch(
-    "https://portfolio-backend-vk4j.onrender.com/api/contact"
+    "https://portfolio-backend-blond-xi.vercel.app/api/contact"
   );
 
   abouts.value = aboutsData.length;
