@@ -21,7 +21,7 @@
 
   <img
   v-if="image"
-  :src="`https://portfolio-backend-blond-xi.vercel.app${image}`"
+  :src="imageUrl(image)"
   class="w-44 h-28 mt-4 object-cover rounded border"
 />
 
@@ -83,7 +83,7 @@
 
           <td class="border p-2">
   <img
-    :src="`https://portfolio-backend-blond-xi.vercel.app${item.image}`"
+    :src="imageUrl(item.image)"
     class="w-24 h-16 object-cover rounded"
   />
 </td>
@@ -142,6 +142,9 @@ const title = ref('')
 const image = ref('')
 
 const uploading = ref(false)
+const imageUrl = (value) => value?.startsWith('http')
+  ? value
+  : `https://portfolio-backend-blond-xi.vercel.app${value || ''}`
 
 const description = ref('')
 const preview = ref('')

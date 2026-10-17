@@ -21,7 +21,7 @@
 
           <img
             v-if="icon"
-            :src="`https://portfolio-backend-blond-xi.vercel.app${icon}`"
+            :src="imageUrl(icon)"
             class="w-32 h-32 object-contain mt-4 border rounded"
           />
 
@@ -110,6 +110,9 @@ const editId = ref(null)
 const name = ref('')
 const link = ref('')
 const icon = ref('')
+const imageUrl = (value) => value?.startsWith('http')
+  ? value
+  : `https://portfolio-backend-blond-xi.vercel.app${value || ''}`
 
 const startYear = ref('')
 const endYear = ref('')
